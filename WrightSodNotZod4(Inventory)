@@ -1,0 +1,85 @@
+//AUTHOR:Kamal Wright
+//COURSE:CPT187
+//Purpose: Serves as the amount of Sod available
+//in a inventory, basically the amount of stock we have
+//STARTDATE:November 13th 2019
+
+package edu.CPT187.Wright.Participation;
+import java.util.Random;
+
+public class Inventory 
+{
+	//Inventory Class Constraints
+	private final String[] ITEM_NAMES = {"Premium Sod","Special Sod","Basic Sod"};
+	private final double[] ITEM_PRICES = {9.95, 5.95, 1.95};
+	private final String[] DISCOUNT_NAMES = {"Member","Senior","None"};
+	private final double[] DISCOUNT_RATES = {0.25, 0.15, 0.0};
+	private final String[] PRIZE_NAMES = {"Vacation Trip","Dream House", "New Car"};
+	private int[] inStockCounts = new int [ITEM_NAMES.length];
+	Random prizeGenerator = new Random();
+	
+	//Inventory Constructor
+	public Inventory()
+	{
+	
+	}
+	//Set Reduce Stock
+	public void setReduceStock(int borrowedHowMany, int borrowedLastItemSelectedIndex)
+	{
+		if(borrowedLastItemSelectedIndex == 0)
+		{
+			inStockCounts[0] = inStockCounts[0] - borrowedHowMany;
+		}
+		else if(borrowedLastItemSelectedIndex == 1)
+		{
+			inStockCounts[1] = inStockCounts[1] - borrowedHowMany;
+		}
+		else
+		{
+			inStockCounts[2] = inStockCounts[2] - borrowedHowMany;
+		}
+	}
+	//Set Stock Count
+	public void setInStockCounts(int[] borrowedCounts)
+	{
+	     inStockCounts = borrowedCounts;
+	     
+	}
+	//Gets Stock Count
+	public int[] getInStockCounts()
+	{
+		return inStockCounts;
+	}
+	//Get Item Names
+	public String[] getItemNames()
+	{
+		return ITEM_NAMES;
+	}
+	//Get Item Price
+	public double[] getItemPrices()
+	{
+		return ITEM_PRICES;
+	}
+	//Get Discount Names
+	public String[] getDiscountNames()
+	{
+		return DISCOUNT_NAMES;
+	}
+	//Get Discount Rates
+	public double[] getDiscountRates()
+	{
+		return DISCOUNT_RATES;
+	}
+	//Get Prize Names
+	public String[] getPrizeNames()
+	{
+		return PRIZE_NAMES;
+	}
+	public int getRandomNumber()
+	{
+		return prizeGenerator.nextInt(PRIZE_NAMES.length);
+	}
+	
+	
+//End Of Class
+}
