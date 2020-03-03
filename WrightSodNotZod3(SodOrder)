@@ -1,0 +1,223 @@
+//AUTHOR:Kamal Wright
+//COURSE:CPT187
+//PURPOSE:To calculate the prices of Sod with the Discount
+//STARTDATE:November 6th 2019
+package edu.CPT187.wright.participation;
+import java.util.Random;
+
+public class SodOrder 
+{
+	//Class variables
+	private final String[] ITEM_NAMES = {"Premium Sod", "Special Sod", "Basic Sod"};
+	private final double [] ITEM_PRICES = {9.95, 5.95, 1.95};
+	private final String[] DISCOUNT_NAMES = {"Member", "Senior", "None"};
+	private final double [] DISCOUNT_RATES = {0.25, 0.15, 0.0};
+	private final String [] PRIZE_NAMES = {"Car","Trip","House"};
+	private final double TAX_RATE = .075;
+	private int [] itemCounts = new int [ITEM_NAMES.length];
+	private int [] discountCounts = new int [DISCOUNT_NAMES.length];
+	private int [] prizeCounts = new int [PRIZE_NAMES.length];
+	private char itemSelection = ' ';
+	private char discountType = ' ';
+	private String itemName = "";
+	private double itemPrice = 0.0;
+	private String discountName = "";
+	private double discountRate = 0.0;
+	private int howMany = 0;
+	//sets PrizeGenerator to Random
+	Random prizeGenerator = new Random();
+	private String prizeName = "";
+	
+	//Sod Order Constructor
+	SodOrder()
+	{
+		
+	}
+	//Set Item Selection method
+	public void setItemSelection(char borrowedMenuSelection)
+	{
+		itemSelection = borrowedMenuSelection;
+	}
+	//Set Item Name method
+	public void setItemName()
+	{
+		if(itemSelection == 'A')
+		{
+			itemName = ITEM_NAMES[0];
+		}
+		else if(itemSelection == 'B')
+		{
+			itemName = ITEM_NAMES[1];
+		}
+		else
+		{
+			itemName = ITEM_NAMES[2];
+		}
+	}
+	//Set Item Price Method
+	public void setItemPrice()
+	{
+		if(itemSelection == 'A')
+		{
+			itemPrice = ITEM_PRICES[0];
+			itemCounts[0]++;
+		}
+		else if(itemSelection == 'B')
+		{
+			itemPrice = ITEM_PRICES[1];
+			itemCounts[1]++;
+		}
+		else
+		{
+			itemPrice = ITEM_PRICES[2];
+			itemCounts[2]++;
+		}
+	}
+	//Set How Many Method
+	public void setHowMany(int borrowedHowMany)
+	{
+		howMany = borrowedHowMany;
+	}
+	//Set Discount Type Method
+	public void setDiscountType(char borrowedMenuSelection)
+	{
+		discountType = borrowedMenuSelection;
+	}
+	public void setDiscountName()
+	{
+		if(discountType == 'A')
+		{
+			discountName = DISCOUNT_NAMES[0];
+		}
+		else if(discountType == 'B')
+		{
+			discountName = DISCOUNT_NAMES[1];
+		}
+		else
+		{
+			discountName = DISCOUNT_NAMES[2];
+		}
+	}
+	//Method to set Discount Rate
+	public void setDiscountRate()
+	{
+		if(discountType == 'A')
+		{
+			discountRate = DISCOUNT_RATES[0];
+			discountCounts[0]++;
+		}
+		else if(discountType == 'B')
+		{
+			discountRate = DISCOUNT_RATES[1];
+			discountCounts[1]++;
+		}
+		else
+		{
+			discountRate = DISCOUNT_RATES[2];
+			discountCounts[2]++;
+		}
+	}
+	//Method to set Prize Name
+	public void setPrizeName()
+	{
+		prizeName = PRIZE_NAMES[getRandomNumber()];
+		if(getRandomNumber() == 0)
+		{
+			prizeCounts[0]++;
+		}
+		else if(getRandomNumber() == 1)
+		{
+			prizeCounts[1]++;
+		}
+		else
+		{
+			prizeCounts[2]++;
+		}
+	}
+	//All Methods to get and return variables
+	public String getItemName()
+	{
+		return itemName;
+	}
+	public double getItemPrice()
+	{
+		return itemPrice;
+	}
+	public int getHowMany()
+	{
+		return howMany;
+	}
+	public String getDiscountName()
+	{
+		return discountName;
+	}
+	public double getDiscountRate()
+	{
+		return discountRate;
+	}
+	public double getDiscountAmt()
+	{
+		return itemPrice * discountRate;
+	}
+	public double getDiscountPrice()
+	{
+		return itemPrice - getDiscountAmt();
+	}
+	public double getSubTotal()
+	{
+		return howMany * getDiscountPrice();
+	}
+	public double getTaxRate()
+	{
+		return TAX_RATE;
+	}
+	public double getTaxAmt()
+	{
+		return TAX_RATE * getSubTotal();
+	}
+	public double getTotalCost()
+	{
+		return getSubTotal() + getTaxAmt();
+	}
+	public String [] getItemNames()
+	{
+		return ITEM_NAMES;
+	}
+	public double[] getItemPrices()
+	{
+		return ITEM_PRICES;
+	}
+	public String[] getDiscountNames()
+	{
+		return DISCOUNT_NAMES;
+	}
+	public double[] getDiscountRates()
+	{
+		return DISCOUNT_RATES;
+	}
+	public int[] getItemCounts()
+	{
+		return itemCounts;
+	}
+	public int[] getDiscountCounts()
+	{
+		return discountCounts;
+	}
+	public int[] getPrizeCounts()
+	{
+		return prizeCounts;
+	}
+	public String getPrizeName()
+	{
+		return prizeName;
+	}
+	public String[] getPrizeNames()
+	{
+		return PRIZE_NAMES;
+	}
+	public int getRandomNumber()
+	{
+		return prizeGenerator.nextInt(PRIZE_NAMES.length);
+	}
+	
+}
